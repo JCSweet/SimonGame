@@ -8,7 +8,7 @@ var started = false;
 // Random sequence generator (Complex version - shows full game pattern)
 function nextSequence() {
   level += 1;
-  $("#level-title").text("Level " + level);
+  $("#level-title").html("Repeat The Sequence<br>Level " + level);
   console.log("Level " + level);
   var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColor = buttonColors[randomNumber];
@@ -98,7 +98,7 @@ function gameOver() {
   setTimeout(function () {
     $("body").removeClass("game-over");
   }, 200);
-  $("#level-title").text("Game Over, Press Any Key to Restart");
+  $("#level-title").html("Game Over!<br>Press Any Key to Restart");
   startOver();
 }
 
