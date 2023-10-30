@@ -122,8 +122,7 @@ function gameOver() {
   setTimeout(function () {
     $("body").removeClass("game-over");
   }, 200);
-  $("#level-title").html("Press Any Key to Restart");
-  $("#turn-order").html("Game Over!");
+  $("#level-title").html("Game Over!");
   startOver();
 }
 
@@ -134,5 +133,6 @@ function startOver() {
   gamePattern = [];
   setTimeout(function () {
     started = false;
-  }, 1000);
+    $("#turn-order").html("Press Any Key to Restart");
+  }, 500);
 }
