@@ -1,14 +1,16 @@
 gamePattern = [];
 userClickedPattern = [];
 buttonColors = ["red", "blue", "green", "yellow"];
-var level = 0;
-var started = false;
+let level = 0;
+let started = false;
+let playerTurn = false;
 
-
-// Random sequence generator (Complex version - shows full game pattern)
+// Random sequence generator (Shows full game pattern)
 function nextSequence() {
+  playerTurn = false;
   level += 1;
-  $("#level-title").html("Repeat The Sequence<br>Level " + level);
+  $("#level-title").html("Level " + level);
+  $("#turn-order").html("Watch Carefully...");
   console.log("Level " + level);
   var randomNumber = Math.floor(Math.random() * 4);
   var randomChosenColor = buttonColors[randomNumber];
@@ -16,6 +18,11 @@ function nextSequence() {
   for (sequence = 0; sequence < level; sequence++) {
     gameSequence(sequence);
   }
+  setTimeout(function () {
+    playerTurn = true;
+    $("#turn-order").html("OK, Your Turn!");
+  }, 500 * sequence);
+  
 };
 
 // Game sequence effects
@@ -29,7 +36,8 @@ function gameSequence(sequence) {
   }, 500 * sequence);
 };
 
-//   Event listener on first keypress (to start game)
+
+//   Event listener on first keypress(to start game)
 $("body").keypress(function () {
   if (!started) {
     setTimeout(function () {
@@ -39,20 +47,33 @@ $("body").keypress(function () {
   }
 });
 
-//   Event listener on button click
-$(".btn").click(function () {
-  if (started) {
-    var userChosenColor = $(this).attr("id");
-    userClickedPattern.push(userChosenColor);
-    animatePress(userChosenColor);
-    playSound(userChosenColor);
-    console.log("Correct answer: " + gamePattern);
-    console.log("Player's answer: " + userClickedPattern);
-    if (userClickedPattern.length >= level) {
-      checkAnswer(level);
-    }
+//   Event listener on first click (to start game) 
+$("body").click(function () {
+  if (!started) {
+    setTimeout(function () {
+      nextSequence();
+      started = true;
+    }, 500);
   }
 });
+
+//   Event listener on button click
+  $(".btn").click(function () {
+    if (started && playerTurn) {
+      var userChosenColor = $(this).attr("id");
+      userClickedPattern.push(userChosenColor);
+      animatePress(userChosenColor);
+      playSound(userChosenColor);
+      console.log("Correct answer: " + gamePattern);
+      console.log("Player's answer: " + userClickedPattern);
+      if (userClickedPattern.length >= level) {
+        playerTurn = false;
+        checkAnswer(level);
+      }
+    }
+  });
+
+
 
 // Animation on user input
 function animatePress(currentColor) {
@@ -94,16 +115,21 @@ function checkAnswer(currentLevel) {
 
 // Wrong Answer
 function gameOver() {
+  playerTurn = false;
+  var gameOverSound = new Audio("sounds/wrong.mp3");
+  gameOverSound.play();
   $("body").addClass("game-over");
   setTimeout(function () {
     $("body").removeClass("game-over");
   }, 200);
-  $("#level-title").html("Game Over!<br>Press Any Key to Restart");
+  $("#level-title").html("Press Any Key to Restart");
+  $("#turn-order").html("Game Over!");
   startOver();
 }
 
 // Reset game
 function startOver() {
+  playerTurn = false;
   level = 0;
   gamePattern = [];
   setTimeout(function () {

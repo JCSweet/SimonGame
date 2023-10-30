@@ -1,7 +1,7 @@
 body {
-  background-color: #011F3F;
+  background-color: #333333;
   font-family: 'Press Start 2P', cursive;
-  color: #FEF2BF;
+  color: rgb(197, 197, 197);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,42 +20,50 @@ h1 {
 h2 {
   font-size: 1.5em;
   line-height: 1.8em;
-  margin: 1.2em 0;
+  margin: 2em 0;
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 50px;
+  gap: 20px;
 }
 
 .btn {
   width: 260px;
   height: 260px;
   border: 10px solid black;
-  border-radius: 20%;
+  border-radius: 8%;
 }
 
 .game-over {
-  background-color: red;
+  background-color: #747474;
   opacity: 0.8;
-}
-
-.red {
-  background-color: red;
 }
 
 .green {
   background-color: green;
+  border-bottom-right-radius: 5%;
+  border-top-left-radius: 100%;
 }
 
-.blue {
-  background-color: blue;
+.red {
+  background-color: red;
+  border-bottom-left-radius: 5%;
+  border-top-right-radius: 100%;
 }
 
 .yellow {
   background-color: yellow;
+  border-top-right-radius: 5%;
+  border-bottom-left-radius: 100%;
+}
+
+.blue {
+  background-color: blue;
+  border-top-left-radius: 5%;
+  border-bottom-right-radius: 100%;
 }
 
 .pressed {
@@ -72,7 +80,7 @@ h2 {
   height: 160px;
 }
 .container {
-  gap: 30px;
+  gap: 15px;
 }
 }
 
@@ -84,9 +92,6 @@ h2 {
    width: 150px;
    height: 150px;
  }
- .container {
-   gap: 20px;
- }
  }
 
  @media (max-width: 400px) {
@@ -94,6 +99,9 @@ h2 {
    width: 140px;
    height: 140px;
  }
+ .container {
+  gap: 15px;
+}
  }
 
  @media (max-width: 380px) {
@@ -105,8 +113,8 @@ h2 {
    height: 120px;
  }
  .container {
-   gap: 20px;
- }
+  gap: 10px;
+}
  }
 
  @media (max-width: 350px) {
@@ -116,9 +124,6 @@ h2 {
   .btn {
    width: 110px;
    height: 110px;
- }
- .container {
-   gap: 20px;
  }
  }
 
