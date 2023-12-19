@@ -85,7 +85,7 @@ function animatePress(currentColor) {
 
 // Make sound
 function playSound(activeColor) {
-  var colorSound = new Audio("sounds/" + activeColor + ".mp3");
+  var colorSound = new Audio("Assets/sounds/simon/" + activeColor + ".mp3");
   colorSound.play();
 };
 
@@ -116,7 +116,7 @@ function checkAnswer(currentLevel) {
 // Wrong Answer
 function gameOver() {
   playerTurn = false;
-  var gameOverSound = new Audio("sounds/wrong.mp3");
+  var gameOverSound = new Audio("Assets/sounds/simon/wrong.mp3");
   gameOverSound.play();
   $("body").addClass("game-over");
   setTimeout(function () {
